@@ -48,29 +48,29 @@
 <body>
 
     <div class="container">
-        <!-- 3. Time appropriate greeting will be injected here -->
+       
         <h1 id="greeting">Welcome to our Store!</h1>
         
-        <!-- 4. Data presentation area -->
+        
         <div class="order-details">
             <h3>Order Summary</h3>
             <p id="order-summary">Processing your order...</p>
             
-            <!-- 5. Expected arrival date will be injected here -->
+            
             <p id="arrival-date"></p>
         </div>
     </div>
 
     <script>
-        // 1. Alert the customer to welcome them when they open the link
+  
         alert("Welcome to our online store!");
 
-        // 2. Prompts to collect customer information
+
         let customerName = prompt("Please enter your name:");
         let itemRequested = prompt("What item would you like to request?");
         let numberOfItems = prompt("How many items would you like to order? (1-100)");
 
-        // 3. Determine the time-appropriate greeting
+
         let currentHour = new Date().getHours();
         let timeGreeting = "Good Day";
 
@@ -82,20 +82,19 @@
             timeGreeting = "Good Evening";
         }
 
-        // Display the personalized greeting in the HTML
+  
         document.getElementById("greeting").innerText = `${timeGreeting} ${customerName}, Thank you for Ordering!`;
 
-        // 4. Present the order details on the website
         document.getElementById("order-summary").innerHTML = `
             You have ordered <span class="highlight">${numberOfItems}</span> x <span class="highlight">${itemRequested}</span>.
         `;
 
-        // 5. Calculate and display the arrival date (exactly 7 days from today)
+    
         let orderDate = new Date();
         let arrivalDate = new Date();
         arrivalDate.setDate(orderDate.getDate() + 7);
 
-        // Format the date to a readable string (e.g., Monday, October 19, 2026)
+    
         let dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
         let formattedArrivalDate = arrivalDate.toLocaleDateString(undefined, dateOptions);
 
