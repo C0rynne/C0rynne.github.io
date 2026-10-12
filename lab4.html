@@ -1,0 +1,108 @@
+<html>
+<body>
+<h1></h1>
+</body>
+</html>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSC 225 Lab 4 - Ordering Website</title>
+    <style>
+        body {
+            font-family: Times New Roman, sans-serif;
+            margin: 40px;
+            background-color: #3E044D;
+            color: #441;
+        }
+        .container {
+            max-width: 600px;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #210229;
+        }
+        .order-details {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #eef2f7;
+            border-left: 5px solid #13092B;
+            border-radius: 4px;
+        }
+        p {
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+        .highlight {
+            font-weight: bold;
+            color: #35204A;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- 3. Time appropriate greeting will be injected here -->
+        <h1 id="greeting">Welcome to our Store!</h1>
+        
+        <!-- 4. Data presentation area -->
+        <div class="order-details">
+            <h3>Order Summary</h3>
+            <p id="order-summary">Processing your order...</p>
+            
+            <!-- 5. Expected arrival date will be injected here -->
+            <p id="arrival-date"></p>
+        </div>
+    </div>
+
+    <script>
+        // 1. Alert the customer to welcome them when they open the link
+        alert("Welcome to our online store!");
+
+        // 2. Prompts to collect customer information
+        let customerName = prompt("Please enter your name:");
+        let itemRequested = prompt("What item would you like to request?");
+        let numberOfItems = prompt("How many items would you like to order? (1-100)");
+
+        // 3. Determine the time-appropriate greeting
+        let currentHour = new Date().getHours();
+        let timeGreeting = "Good Day";
+
+        if (currentHour < 12) {
+            timeGreeting = "Good Morning";
+        } else if (currentHour < 18) {
+            timeGreeting = "Good Afternoon";
+        } else {
+            timeGreeting = "Good Evening";
+        }
+
+        // Display the personalized greeting in the HTML
+        document.getElementById("greeting").innerText = `${timeGreeting} ${customerName}, Thank you for Ordering!`;
+
+        // 4. Present the order details on the website
+        document.getElementById("order-summary").innerHTML = `
+            You have ordered <span class="highlight">${numberOfItems}</span> x <span class="highlight">${itemRequested}</span>.
+        `;
+
+        // 5. Calculate and display the arrival date (exactly 7 days from today)
+        let orderDate = new Date();
+        let arrivalDate = new Date();
+        arrivalDate.setDate(orderDate.getDate() + 7);
+
+        // Format the date to a readable string (e.g., Monday, October 19, 2026)
+        let dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        let formattedArrivalDate = arrivalDate.toLocaleDateString(undefined, dateOptions);
+
+        document.getElementById("arrival-date").innerHTML = `
+            Expected Arrival Date: <span class="highlight">${formattedArrivalDate}</span> (exactly 7 days from today).
+        `;
+    </script>
+
+</body>
+</html>
