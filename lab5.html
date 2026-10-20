@@ -1,0 +1,131 @@
+<html>
+<body>
+<h1></h1>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JS Registration Page For Our Website</title>
+  
+  <link href="https://jsdelivr.net" rel="stylesheet">
+  <style>
+    body { background-color: #FFC7F0; }
+    .card { max-width: 400px; margin: 50px auto; }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="card shadow">
+      <div class="card-header bg-primary text-white text-center">
+        <h4>Product Registration</h4>
+      </div>
+      <div class="card-body">
+        
+        <form id="registrationForm">
+          <div class="mb-3">
+            <label for="firstName" class="form-label">First Name</label>
+            <input type="text" class="form-control" id="firstName">
+          </div>
+          <div class="mb-3">
+            <label for="lastName" class="form-label">Last Name</label>
+            <input type="text" class="form-control" id="lastName">
+          </div>
+          <div class="mb-3">
+            <label for="email" class="form-label">Email Address</label>
+            <input type="email" class="form-control" id="email">
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password">
+          </div>
+          <div class="mb-3">
+            <label for="dob" class="form-label">Date of Birth</label>
+            <input type="date" class="form-control" id="dob">
+          </div>
+          <button type="submit" class="btn btn-primary w-100">Register</button>
+        </form>
+
+        
+        <div id="output" class="mt-4"></div>
+      </div>
+    </div>
+  </div>
+
+  
+  <script>
+    document.getElementById('registrationForm').addEventListener('submit', function(event) {
+      
+      event.preventDefault();
+
+      
+      const outputDiv = document.getElementById('output');
+      outputDiv.innerHTML = '';
+
+      
+      const firstName = document.getElementById('firstName').value.trim();
+      const lastName = document.getElementById('lastName').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value;
+      const dob = document.getElementById('dob').value;
+
+      
+      if (!firstName || !lastName || !email || !password || !dob) {
+        showResult(false, 'Registration Failed: All fields must be filled out.');
+        return;
+      }
+
+      
+      if (!password.includes('!') && !password.includes('?')) {
+        showResult(false, 'Registration Failed: Password must contain a special character (! or ?).');
+        return;
+      }
+
+      
+      const maskedPassword = '*'.repeat(password.length);
+
+      
+      const userObject = {
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        password: maskedPassword,
+        dob: dob
+      };
+
+      
+      showResult(true, 'Registration Successful!', userObject);
+    });
+
+    
+    function showResult(isSuccess, message, userObj = null) {
+      const outputDiv = document.getElementById('output');
+      const alertClass = isSuccess ? 'alert-success' : 'alert-danger';
+      
+      let htmlContent = `<div class="alert ${alertClass}" role="alert">${message}</div>`;
+      
+      if (isSuccess && userObj) {
+        htmlContent += `
+          <div class="card bg-light p-3">
+            <h5>Registered User Details:</h5>
+            <ul class="list-group">
+              <li class="list-group-item"><strong>First Name:</strong> ${userObj.firstName}</li>
+              <li class="list-group-item"><strong>Last Name:</strong> ${userObj.lastName}</li>
+              <li class="list-group-item"><strong>Email:</strong> ${userObj.email}</li>
+              <li class="list-group-item"><strong>Password:</strong> ${userObj.password}</li>
+              <li class="list-group-item"><strong>Date of Birth:</strong> ${userObj.dob}</li>
+            </ul>
+          </div>
+        `;
+      }
+      
+      outputDiv.innerHTML = htmlContent;
+    }
+  </script>
+</body>
+</html>
+
